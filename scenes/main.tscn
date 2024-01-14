@@ -1,3 +1,36 @@
-[gd_scene format=3 uid="uid://g2mbcsageaux"]
+[gd_scene load_steps=6 format=3 uid="uid://g2mbcsageaux"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_7sei0"]
+[ext_resource type="PackedScene" uid="uid://dmajo263fofmf" path="res://scenes/player_body.tscn" id="1_x4j20"]
+[ext_resource type="Texture2D" uid="uid://doje5egvae03c" path="res://images/tile_plain_block.png" id="2_dmc3n"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5hxe"]
+resource_name = "Floor"
+texture = ExtResource("2_dmc3n")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_ixdh6"]
+uv_clipping = true
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_k5hxe")
 
 [node name="Main" type="Node"]
+script = ExtResource("1_7sei0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+
+[node name="Player" parent="." instance=ExtResource("1_x4j20")]
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_ixdh6")
+format = 2
+layer_0/tile_data = PackedInt32Array(655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(480, 270)
