@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://dllrnwiwa1366"]
 
-[ext_resource type="Texture2D" uid="uid://6bh6uslnax1p" path="res://images/red_line.png" id="1_j4mdo"]
-[ext_resource type="Script" path="res://scenes/danger_zone.gd" id="1_ot5jv"]
+[ext_resource type="Script" path="res://scenes/danger_zone/danger_zone.gd" id="1_262km"]
+[ext_resource type="Texture2D" uid="uid://6bh6uslnax1p" path="res://scenes/danger_zone/red_line.png" id="2_d50f5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ce54"]
 size = Vector2(4, 180.333)
 
 [node name="DangerZone" type="Area2D"]
 scale = Vector2(3, 3)
-script = ExtResource("1_ot5jv")
+script = ExtResource("1_262km")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.19209e-07, 90)
 scale = Vector2(1, 11.25)
-texture = ExtResource("1_j4mdo")
+texture = ExtResource("2_d50f5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5.96046e-08, 89.8333)

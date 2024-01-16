@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbdnpa3bgtncs"
-path="res://.godot/imported/player_square.png-d7199d2614a1d0cd27823fa9c57020b3.ctex"
+uid="uid://6bh6uslnax1p"
+path="res://.godot/imported/red_line.png-07450390a5894955fb2eaaa345db8f62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/player_square.png"
-dest_files=["res://.godot/imported/player_square.png-d7199d2614a1d0cd27823fa9c57020b3.ctex"]
+source_file="res://scenes/danger_zone/red_line.png"
+dest_files=["res://.godot/imported/red_line.png-07450390a5894955fb2eaaa345db8f62.ctex"]
 
 [params]
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://5wm3sfgy5bfg"]
+[gd_scene load_steps=5 format=3 uid="uid://5wm3sfgy5bfg"]
 
 [ext_resource type="Texture2D" uid="uid://doje5egvae03c" path="res://images/tile_plain_block.png" id="1_afybb"]
+[ext_resource type="Script" path="res://scenes/levels/Level.gd" id="1_t6oj5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5hxe"]
 resource_name = "Floor"
@@ -16,6 +17,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_k5hxe")
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_t6oj5")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -23,3 +25,9 @@ scale = Vector2(3, 3)
 tile_set = SubResource("TileSet_w7gmp")
 format = 2
 layer_0/tile_data = PackedInt32Array(655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0)
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(202, 274)
+
+[node name="DangerPosition" type="Marker2D" parent="."]
+position = Vector2(-200, 0)
