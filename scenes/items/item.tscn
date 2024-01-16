@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd581uajje6dl"]
+
+[ext_resource type="Texture2D" uid="uid://cl641hrgy3v48" path="res://scenes/items/item.png" id="1_pcf33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qj6c8"]
+size = Vector2(6, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d5d1b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pcf33")
+}],
+"loop": true,
+"name": &"placeholder",
+"speed": 5.0
+}]
+
+[node name="Item" type="Area2D"]
+texture_filter = 1
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qj6c8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d5d1b")
+animation = &"placeholder"
