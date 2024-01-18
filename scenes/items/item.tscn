@@ -16,7 +16,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Item" type="Area2D"]
+[node name="Item" type="Area2D" groups=["Items"]]
 texture_filter = 1
 scale = Vector2(3, 3)
 
