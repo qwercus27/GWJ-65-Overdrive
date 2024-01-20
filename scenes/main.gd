@@ -1,6 +1,7 @@
 extends Node
 
 var level
+var goal_cleared
 const ITEM = preload("res://scenes/items/item.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +18,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	$Camera2D.position.x = $Player.position.x
+	if not goal_cleared:
+		$Camera2D.position.x = $Player.position.x
+	
 	
 	if(Input.is_action_just_pressed("1")):
 		change_level("1")
@@ -29,10 +32,12 @@ func _process(delta):
 	$HUD.get_node("BoostMeterLine").scale.x = _current_width
 		
 	_update_danger_distance()
+	
+		
 
 func change_level(level_id):
 	level.queue_free()
-	Global.current_level = load("res://scenes/levels/level_" + level_id + ".tscn")
+	Global.current_level = load("res://scenes/levels/level_" + str(level_id) + ".tscn")
 	#level = Global.current_level.instantiate()
 	#add_child(level)
 	_ready()
@@ -70,3 +75,19 @@ func _update_danger_distance():
 	else:
 		_dist_label.position.x = _dist_pos.position.x 
 	
+
+
+func _on_player_goal_cleared():
+	if not goal_cleared:
+		$Player.goal = true
+		goal_cleared = true
+		$NextLevelTimer.start()
+		
+
+
+func _on_next_level_timer_timeout():
+	
+	var next_level = int(str(level.get_path()).split("_")[1]) + 1
+	change_level(next_level)
+	goal_cleared = false
+	$Player.goal = false

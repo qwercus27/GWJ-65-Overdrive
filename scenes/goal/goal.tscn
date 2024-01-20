@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://doje5egvae03c" path="res://images/tile_plain_block.png" id="1_gyg8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s53x7"]
-size = Vector2(16, 179.333)
+size = Vector2(16, 179.667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hhxt"]
 size = Vector2(16, 16)
@@ -20,7 +20,7 @@ texture = ExtResource("1_gyg8v")
 position = Vector2(-15, 23.6667)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(15, -105.333)
+position = Vector2(15, -105.167)
 shape = SubResource("RectangleShape2D_s53x7")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

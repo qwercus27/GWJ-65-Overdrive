@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal goal_cleared
 var normal_jump_v = -400.0
 var overdrive_jump_v = -500.0
 var jump_v = normal_jump_v
@@ -9,7 +10,7 @@ var speed = normal_speed
 var overdrive_meter = 0
 var meter_max = 5
 var timer_max = 4
-
+var goal
 
 var overdrive = false
 
@@ -28,18 +29,24 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * speed
+	
+	if not goal:
+		var direction = Input.get_axis("left", "right")
+		
+		if direction:
+			velocity.x = direction * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.x = speed
 
 	move_and_slide()
 	
 	if(overdrive_meter >= meter_max):
-		overdrive = true
-		overdrive_meter = float(meter_max - 0.1)
-		$OverdriveTimer.start(timer_max)
+		if Input.is_action_just_pressed("a"):
+			overdrive = true
+			overdrive_meter = float(meter_max - 0.1)
+			$OverdriveTimer.start(timer_max)
 				
 	if overdrive:
 		speed = overdrive_speed
@@ -69,6 +76,8 @@ func _on_area_2d_area_entered(area):
 			
 	if(area.is_in_group("Goal")):
 		print("GOAL!")
+		goal_cleared.emit()
+		
 	
 
 

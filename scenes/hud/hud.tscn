@@ -65,3 +65,11 @@ label_settings = SubResource("LabelSettings_dsuot")
 [node name="DistancePosition" type="Marker2D" parent="."]
 position = Vector2(14, 255)
 scale = Vector2(3, 3)
+
+[node name="BoostReadyLabel" type="Label" parent="."]
+visible = false
+offset_left = 131.0
+offset_top = 54.0
+offset_right = 171.0
+offset_bottom = 77.0
+text = "Ready! Press A"

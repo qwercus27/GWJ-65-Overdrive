@@ -28,3 +28,10 @@ layer_0/tile_data = PackedInt32Array(655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 6
 [node name="DangerZone" parent="." instance=ExtResource("3_0v066")]
 
 [node name="HUD" parent="." instance=ExtResource("4_evjgu")]
+
+[node name="NextLevelTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="goal_cleared" from="Player" to="." method="_on_player_goal_cleared"]
+[connection signal="timeout" from="NextLevelTimer" to="." method="_on_next_level_timer_timeout"]
