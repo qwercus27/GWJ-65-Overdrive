@@ -27,9 +27,8 @@ func _process(delta):
 	var _meter_width =  $HUD.meter_width
 	var _current_width = (float($Player.overdrive_meter) / float($Player.meter_max)) * _meter_width * 9
 	$HUD.get_node("BoostMeterLine").scale.x = _current_width
-	
-	var danger_dist = ($Player.position.x - $DangerZone.position.x) / (3*16)
-	$HUD.get_node("DangerDistance").text = "< " + str(snapped(danger_dist, 0.1))
+		
+	_update_danger_distance()
 
 func change_level(level_id):
 	level.queue_free()
@@ -47,3 +46,27 @@ func instantiate_tiles():
 			object.position = tilemap.map_to_local(cellpos) * tilemap.scale
 			add_child(object)
 			tilemap.erase_cell(0, cellpos)
+			
+func _update_danger_distance():
+	
+	var _dist_label = $HUD.get_node("DangerDistance")
+	var _dist_pos = $HUD.get_node("DistancePosition")
+	var _danger_pos = $DangerZone.position.x
+	var _danger_dist = ($Player.position.x - _danger_pos) / (3*16)
+	var _view_width = get_viewport().size.x
+	
+	if(_danger_dist > 0): 
+		_dist_label.text = "< " + str(snapped(_danger_dist, 0.1))
+	else:
+		_dist_label.text = str(snapped(_danger_dist * -1, 0.1)) + " >"
+	
+	if _danger_dist < 10 and _danger_dist > 0:
+		_dist_label.position.x = _danger_pos - $Camera2D.position.x + _view_width/2 + 8*3
+	elif _danger_dist < 0 and _danger_dist > -10:
+		_dist_label.position.x = _danger_pos - $Camera2D.position.x + _view_width/2 - 16*3
+		
+	elif _danger_dist <= -10:
+		_dist_label.position.x = _dist_pos.position.x + _view_width - 32*3
+	else:
+		_dist_label.position.x = _dist_pos.position.x 
+	

@@ -50,8 +50,6 @@ func _physics_process(delta):
 		speed = normal_speed
 		jump_v = normal_jump_v
 	
-		
-	print($OverdriveTimer.time_left)
 
 func change_overdrive(amount):
 	overdrive_meter += amount
