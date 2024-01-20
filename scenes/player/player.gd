@@ -66,6 +66,9 @@ func _on_area_2d_area_entered(area):
 			var _time = $OverdriveTimer.time_left + 0.5
 			if _time > timer_max: _time = timer_max
 			$OverdriveTimer.start(_time)
+			
+	if(area.is_in_group("Goal")):
+		print("GOAL!")
 	
 
 

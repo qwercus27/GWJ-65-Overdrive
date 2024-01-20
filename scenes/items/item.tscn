@@ -19,7 +19,6 @@ animations = [{
 
 [node name="Item" type="Area2D" groups=["Items"]]
 texture_filter = 1
-scale = Vector2(3, 3)
 script = ExtResource("1_qau8l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
