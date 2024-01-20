@@ -1,6 +1,5 @@
 extends Area2D
 
-var speed = 275
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,5 +8,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position.x += delta * speed
-	
+	pass
+
+#
+#func _on_area_entered(area):
+#	print("Item collision " + str(area.get_groups()))
+#	if(area.is_in_group("player")):
+#		self.queue_free()

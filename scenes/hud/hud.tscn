@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://bi0o07j0g42lx"]
+
+[ext_resource type="Texture2D" uid="uid://bnrx0hmchlagv" path="res://scenes/hud/overdrive_meter_line.png" id="1_1s7p6"]
+[ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_liasb"]
+[ext_resource type="Script" path="res://scenes/hud/BoostMeterFrame.gd" id="2_rhabt"]
+[ext_resource type="Texture2D" uid="uid://c5ymdhc3wia44" path="res://scenes/hud/overdrive_meter_frame_mid.png" id="3_uthqm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rrjq8"]
+font_size = 21
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_liasb")
+
+[node name="BoostLabel" type="Label" parent="."]
+offset_left = 18.0
+offset_top = 15.0
+offset_right = 82.0
+offset_bottom = 48.0
+text = "Overdrive:"
+label_settings = SubResource("LabelSettings_rrjq8")
+
+[node name="BoostMeterLine" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(133, 19)
+scale = Vector2(3, 3)
+texture = ExtResource("1_1s7p6")
+centered = false
+
+[node name="BoostMeterFrame" type="Node2D" parent="."]
+position = Vector2(42, 1)
+scale = Vector2(3, 3)
+script = ExtResource("2_rhabt")
+
+[node name="Left" type="Sprite2D" parent="BoostMeterFrame"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(29.3333, 6)
+texture = ExtResource("1_1s7p6")
+centered = false
+
+[node name="Mid" type="Sprite2D" parent="BoostMeterFrame"]
+texture_filter = 1
+position = Vector2(30.3333, 5)
+scale = Vector2(0.999996, 1)
+texture = ExtResource("3_uthqm")
+centered = false
+
+[node name="Right" type="Sprite2D" parent="BoostMeterFrame"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(31.3333, 6)
+texture = ExtResource("1_1s7p6")
+centered = false
+
+[node name="DangerDistance" type="Label" parent="."]
+offset_left = 9.0
+offset_top = 222.0
+offset_right = 55.0
+offset_bottom = 248.0
+text = "< 0.00"
