@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ce54"]
 size = Vector2(4, 180.333)
 
-[node name="DangerZone" type="Area2D"]
+[node name="DangerZone" type="Area2D" groups=["Danger"]]
 scale = Vector2(3, 3)
 script = ExtResource("1_262km")
 

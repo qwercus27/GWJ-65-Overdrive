@@ -11,6 +11,8 @@ var overdrive_meter = 0
 var meter_max = 5
 var timer_max = 4
 var goal
+var max_hp = 10
+var hp = max_hp
 
 var overdrive = false
 
@@ -38,7 +40,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 	else:
-		velocity.x = speed
+		velocity.x = overdrive_speed
 
 	move_and_slide()
 	
@@ -56,7 +58,7 @@ func _physics_process(delta):
 	else:
 		speed = normal_speed
 		jump_v = normal_jump_v
-	
+
 
 func change_overdrive(amount):
 	overdrive_meter += amount
@@ -77,7 +79,7 @@ func _on_area_2d_area_entered(area):
 	if(area.is_in_group("Goal")):
 		print("GOAL!")
 		goal_cleared.emit()
-		
+				
 	
 
 
