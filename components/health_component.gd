@@ -30,4 +30,6 @@ func change_health(amount : int):
 	
 	if health <= 0:
 		health_depleted.emit()
+		
+	print(get_parent().name + " was hit")
 

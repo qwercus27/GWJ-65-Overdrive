@@ -16,11 +16,12 @@ func _ready():
 	
 	$Player.z_index = 1
 	$DangerLine.z_index = 2
-	if(get_level_id(level) == 1): 
-		danger_camera = true
-		$DangerCameraTimer.start()
-		$HUD.visible = false
-	else: danger_camera = false
+	
+#	if(get_level_id(level) == 1): 
+#		danger_camera = true
+#		$DangerCameraTimer.start()
+#		#$HUD.visible = false
+#	else: danger_camera = false
 	
 	var _h = $Player/HealthComponent.health
 	var _max_h = $Player/HealthComponent.max_health
@@ -32,21 +33,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	
-	if danger_camera:
-		$Camera2D.position.x = $DangerLine.position.x
-	elif get_level_id(level) == 1:
-		if $Camera2D.position.x != $Player.position.x:
-			$Camera2D.position.x = move_toward($Camera2D.position.x, $Player.position.x, 50)
-		#if not goal_cleared:
-		#	$Camera2D.position.x = $Player.position.x
-		else:
-			$HUD.visible = true
-	else:
-		$Camera2D.position.x = $Player.position.x
-		
-	
-	
+	_danger_preview()
+
 	if(Input.is_action_just_pressed("1")):
 		change_level("1")
 	if(Input.is_action_just_pressed("2")):
@@ -102,6 +90,21 @@ func _update_danger_distance():
 		_dist_label.position.x = _dist_pos.position.x + _view_width - 32*3
 	else:
 		_dist_label.position.x = _dist_pos.position.x 
+
+func _danger_preview():
+	
+	if danger_camera:
+		$Camera2D.position.x = $DangerLine.position.x
+		$HUD.visible = false
+	elif get_level_id(level) == 1:
+		if $Camera2D.position.x != $Player.position.x:
+			$Camera2D.position.x = move_toward($Camera2D.position.x, $Player.position.x, 50)
+		#if not goal_cleared:
+		#	$Camera2D.position.x = $Player.position.x
+		else:
+			$HUD.visible = true
+	else:
+		$Camera2D.position.x = $Player.position.x
 
 
 func _on_player_goal_cleared():

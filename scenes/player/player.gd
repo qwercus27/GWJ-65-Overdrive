@@ -93,3 +93,12 @@ func _on_overdrive_timer_timeout():
 func _on_health_component_health_changed():
 	print("player signal")
 	health_changed.emit()
+
+
+func _on_hitbox_area_entered(area):
+	print("player hitbox collided with " + area.name + " of " + area.get_parent().name)
+	if(area.name == "Hurtbox"):
+		if area.get_parent().has_node("HealthComponent"):
+			area.get_parent().get_node("HealthComponent").change_health(-1)
+		velocity.y = jump_v
+

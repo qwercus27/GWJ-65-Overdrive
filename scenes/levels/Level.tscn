@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://5wm3sfgy5bfg"]
+[gd_scene load_steps=9 format=3 uid="uid://5wm3sfgy5bfg"]
 
 [ext_resource type="Texture2D" uid="uid://doje5egvae03c" path="res://images/tile_plain_block.png" id="1_afybb"]
 [ext_resource type="Script" path="res://scenes/levels/Level.gd" id="1_t6oj5"]
-[ext_resource type="Texture2D" uid="uid://cl641hrgy3v48" path="res://scenes/items/item.png" id="3_md01o"]
 [ext_resource type="PackedScene" uid="uid://b3hcggwcc0ton" path="res://scenes/goal/goal.tscn" id="4_gg2q2"]
 [ext_resource type="PackedScene" uid="uid://cd581uajje6dl" path="res://scenes/items/item.tscn" id="5_csvkc"]
+[ext_resource type="PackedScene" uid="uid://ctrnajsia6kgq" path="res://scenes/enemies/mob.tscn" id="6_tiekg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5hxe"]
 resource_name = "Floor"
@@ -14,23 +14,15 @@ texture = ExtResource("1_afybb")
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujxnk"]
-resource_name = "Item"
-texture = ExtResource("3_md01o")
-texture_region_size = Vector2i(6, 6)
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tkgac"]
 scenes/1/scene = ExtResource("4_gg2q2")
 scenes/2/scene = ExtResource("5_csvkc")
+scenes/3/scene = ExtResource("6_tiekg")
 
 [sub_resource type="TileSet" id="TileSet_w7gmp"]
 uv_clipping = true
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_k5hxe")
-sources/1 = SubResource("TileSetAtlasSource_ujxnk")
 sources/4 = SubResource("TileSetScenesCollectionSource_tkgac")
 
 [node name="Level" type="Node2D"]
