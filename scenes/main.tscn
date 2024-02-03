@@ -41,6 +41,8 @@ wait_time = 3.0
 one_shot = true
 
 [connection signal="goal_cleared" from="Player" to="." method="_on_player_goal_cleared"]
+[connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]
+[connection signal="od_meter_changed" from="Player" to="." method="_on_player_od_meter_changed"]
 [connection signal="timeout" from="NextLevelTimer" to="." method="_on_next_level_timer_timeout"]
 [connection signal="timeout" from="DangerTimer" to="." method="_on_danger_timer_timeout"]
 [connection signal="timeout" from="DangerCameraTimer" to="." method="_on_danger_camera_timer_timeout"]

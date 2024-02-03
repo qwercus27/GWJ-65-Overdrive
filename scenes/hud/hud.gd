@@ -25,5 +25,15 @@ func _process(delta):
 
 func flash_red():
 	$FlashTimer.start(1)
+
+
+func update_health_meter(health : int, max_health : int):
 	
-	
+	var _new_width = (float(health) / float(max_health)) * hp_meter_width * 9
+	$HP/HPLine.scale.x = _new_width
+
+func update_od_meter(od : float, max_od : float):
+
+	var _new_width = od / max_od * od_meter_width * 9
+	$Boost/BoostMeterLine.scale.x = _new_width
+

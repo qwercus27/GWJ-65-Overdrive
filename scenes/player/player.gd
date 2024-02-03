@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 signal goal_cleared
+signal health_changed
+signal od_meter_changed
+
 var normal_jump_v = -400.0
 var overdrive_jump_v = -500.0
 var jump_v = normal_jump_v
@@ -11,14 +14,11 @@ var overdrive_meter = 0
 var meter_max = 5
 var timer_max = 4
 var goal
-var max_hp = 10
-var hp = max_hp
 
 var overdrive = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -54,6 +54,7 @@ func _physics_process(delta):
 		speed = overdrive_speed
 		jump_v = overdrive_jump_v
 		overdrive_meter = meter_max * ($OverdriveTimer.time_left / 4) - 0.01
+		od_meter_changed.emit()
 		
 	else:
 		speed = normal_speed
@@ -69,7 +70,9 @@ func _on_area_2d_area_entered(area):
 	
 	if(area.is_in_group("Items")):
 		area.queue_free()
-		if not overdrive: change_overdrive(1)
+		if not overdrive: 
+			change_overdrive(1)
+			od_meter_changed.emit()
 		else: 
 #			var _time = $OverdriveTimer.time_left + (1/meter_max) * timer_max
 			var _time = $OverdriveTimer.time_left + 0.5
@@ -79,11 +82,14 @@ func _on_area_2d_area_entered(area):
 	if(area.is_in_group("Goal")):
 		print("GOAL!")
 		goal_cleared.emit()
-				
-	
 
 
 func _on_overdrive_timer_timeout():
 	overdrive = false
 	overdrive_meter = 0
 	print("timeout")
+
+
+func _on_health_component_health_changed():
+	print("player signal")
+	health_changed.emit()

@@ -21,6 +21,12 @@ func _ready():
 		$DangerCameraTimer.start()
 		$HUD.visible = false
 	else: danger_camera = false
+	
+	var _h = $Player/HealthComponent.health
+	var _max_h = $Player/HealthComponent.max_health
+	
+	$HUD.update_health_meter(_h,_max_h)
+	$HUD.update_od_meter($Player.overdrive_meter, $Player.meter_max)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,13 +52,6 @@ func _process(delta):
 	if(Input.is_action_just_pressed("2")):
 		change_level("2")
 	
-	var _meter_width =  $HUD.od_meter_width
-	var _current_width = (float($Player.overdrive_meter) / float($Player.meter_max)) * _meter_width * 9
-	$HUD.get_node("Boost/BoostMeterLine").scale.x = _current_width
-	
-	var _hp_width =  $HUD.od_meter_width
-	var _current_hp_width = (float($Player.hp) / float($Player.max_hp)) * _hp_width * 9
-	$HUD.get_node("HP/HPLine").scale.x = _current_hp_width
 	
 	if $DangerLine.position.x > $Player.position.x:
 		if not danger:
@@ -63,8 +62,7 @@ func _process(delta):
 		$DangerTimer.stop()
 	
 	_update_danger_distance()
-	
-		
+
 
 func change_level(level_id):
 	level.queue_free()
@@ -73,22 +71,13 @@ func change_level(level_id):
 	#add_child(level)
 	_ready()
 
+
 func get_level_id(level):
 	var _path = str(level.get_path())
 	var _split = _path.split("/")[3].split(".")[0].split("_")[1]
-	print("get level return: " + str(_split))
 	return int(_split)
-	
-#func instantiate_tiles():
-#	var tilemap = level.get_node("TileMap")
-#	for cellpos in tilemap.get_used_cells(0):
-#		var cell = tilemap.get_cell_source_id(0, cellpos)
-#		if cell == 1:
-#			var object = ITEM.instantiate()
-#			object.position = tilemap.map_to_local(cellpos) * tilemap.scale
-#			add_child(object)
-#			tilemap.erase_cell(0, cellpos)
-			
+
+
 func _update_danger_distance():
 	
 	var _dist_label = $HUD.get_node("DangerDistance")
@@ -113,7 +102,6 @@ func _update_danger_distance():
 		_dist_label.position.x = _dist_pos.position.x + _view_width - 32*3
 	else:
 		_dist_label.position.x = _dist_pos.position.x 
-	
 
 
 func _on_player_goal_cleared():
@@ -135,9 +123,20 @@ func _on_next_level_timer_timeout():
 
 
 func _on_danger_timer_timeout():
-	$Player.hp -= 1
+	$Player/HealthComponent.change_health(-1)
 	$HUD.flash_red()
 
 
 func _on_danger_camera_timer_timeout():
 	danger_camera = false
+
+
+func _on_player_health_changed():
+	var _h = $Player/HealthComponent.health
+	var _max_h = $Player/HealthComponent.max_health
+	
+	$HUD.update_health_meter(_h,_max_h)
+
+
+func _on_player_od_meter_changed():
+	$HUD.update_od_meter($Player.overdrive_meter, $Player.meter_max)
