@@ -15,7 +15,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if $Boost/BoostMeterLine.scale.x >= od_meter_width * 9:
 		$Boost/BoostReadyLabel.visible = true
 	else:

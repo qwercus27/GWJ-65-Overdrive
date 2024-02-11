@@ -31,7 +31,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	
 	_danger_preview()
 
@@ -60,8 +60,9 @@ func change_level(level_id):
 	_ready()
 
 
-func get_level_id(level):
-	var _path = str(level.get_path())
+func get_level_id(lvl):
+	var _path = str(lvl.get_path())
+	
 	var _split = _path.split("/")[3].split(".")[0].split("_")[1]
 	return int(_split)
 

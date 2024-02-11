@@ -27,5 +27,3 @@ shape = SubResource("RectangleShape2D_qj6c8")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_d5d1b")
 animation = &"placeholder"
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]

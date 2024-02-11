@@ -102,3 +102,5 @@ func _on_hitbox_area_entered(area):
 			area.get_parent().get_node("HealthComponent").change_health(-1)
 		velocity.y = jump_v
 
+
+

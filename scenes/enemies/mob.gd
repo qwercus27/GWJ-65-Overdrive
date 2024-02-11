@@ -49,8 +49,10 @@ func _on_hitbox_area_entered(area):
 	print("mob hitbox collided with " + area.name + " of " + area.get_parent().name)
 	
 	if(area.name == "Hurtbox"):
-		if area.get_parent().has_node("HealthComponent"):
-			area.get_parent().get_node("HealthComponent").change_health(-1)
+		var parent = area.get_parent()
+		if parent.has_node("HealthComponent"):
+			parent.get_node("HealthComponent").change_health(-1)
+
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
