@@ -12,12 +12,13 @@ func _ready():
 
 func _on_hitbox_area_entered(area):
 
-	if area.owner is CharacterBody2D:
-		print("spike hitbox collided with " + area.name + " of " + area.get_parent().name)
+#	if area.owner is CharacterBody2D:
+#		print("spike hitbox collided with " + area.name + " of " + area.get_parent().name)
 	
 	if(area.name == "Hurtbox"):
 		var parent = area.get_parent()
 		if parent.has_node("HealthComponent"):
-			parent.get_node("HealthComponent").change_health(-1)
-		if parent is CharacterBody2D:
-			parent.velocity.y = -300
+			
+			if parent is CharacterBody2D:
+				var x_vel = parent.velocity.x * -1
+				parent.get_node("HealthComponent").change_health(-1, x_vel, -400)

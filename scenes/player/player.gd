@@ -4,18 +4,21 @@ extends CharacterBody2D
 signal goal_cleared
 signal health_changed
 signal od_meter_changed
+signal damaged
 
 var normal_jump_v = -400.0
 var overdrive_jump_v = -500.0
 var jump_v = normal_jump_v
+
 var normal_speed = 300.0
 var overdrive_speed = 500.0
 var speed = normal_speed
+
 var overdrive_meter = 0
 var meter_max = 5
 var timer_max = 4
-var goal = false
 
+var goal = false
 var overdrive = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -23,6 +26,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 
+	#print("vel_x: " + str(velocity.x))
+	
 	if(overdrive_meter >= meter_max):
 		if Input.is_action_just_pressed("a"):
 			overdrive = true
@@ -42,7 +47,6 @@ func _physics_process(delta):
 
 func change_overdrive(amount):
 	overdrive_meter += amount
-	
 
 
 func _on_area_2d_area_entered(area):
@@ -69,7 +73,6 @@ func _on_overdrive_timer_timeout():
 
 
 func _on_health_component_health_changed():
-
 	health_changed.emit()
 
 
@@ -80,5 +83,27 @@ func _on_hitbox_area_entered(area):
 			area.get_parent().get_node("HealthComponent").change_health(-1)
 		velocity.y = jump_v
 
+# player is damaged
+# vel.x away from damage, vel.y up (usually?)
+# timer starts
+# sprite blinks until timer ends
+# player cannot be damaged until timer ends
 
 
+func _on_health_component_damaged(x_vel : int, y_vel : int):
+	velocity.y = y_vel
+	velocity.x = x_vel
+	damaged.emit()
+	$RecoveryTimer.start()
+	$BlinkTimer.start()
+	$HealthComponent.recovery = true
+
+
+func _on_recovery_timer_timeout():
+	$HealthComponent.recovery = false
+	$AnimatedSprite2D.visible = true
+	$BlinkTimer.stop()
+
+
+func _on_blink_timer_timeout():
+	$AnimatedSprite2D.visible = not $AnimatedSprite2D.visible

@@ -98,10 +98,8 @@ script = ExtResource("8_5yed6")
 script = ExtResource("9_5vn7e")
 
 [node name="RecoveryTimer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
-
-[node name="BlinkTimer" type="Timer" parent="."]
-wait_time = 0.2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="OverdriveTimer" to="." method="_on_overdrive_timer_timeout"]
@@ -109,4 +107,3 @@ wait_time = 0.2
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="RecoveryTimer" to="." method="_on_recovery_timer_timeout"]
-[connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

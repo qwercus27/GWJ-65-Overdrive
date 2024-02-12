@@ -3,25 +3,32 @@ class_name HealthComponent
 
 signal health_changed
 signal health_depleted
+signal damaged(x_vel : int)
 
 @export var max_health : int
 
 var health
+var recovery = false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	
 	health = max_health
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func change_health(amount : int):
+func change_health(amount : int, x_vel := 0, y_vel := 0):
+	
+	if recovery:
+		print(get_parent().name + " was hit, but was in recovery.")
+		return
 	
 	health += amount
+	
+	if(x_vel == 0): 
+		x_vel = owner.velocity.x
+		
+	if(y_vel == 0):
+		y_vel = owner.velocity.y
 	
 	if health > max_health:
 		health = max_health
@@ -30,6 +37,8 @@ func change_health(amount : int):
 	
 	if health <= 0:
 		health_depleted.emit()
+	elif amount < 0:
+		damaged.emit(x_vel, y_vel)
 		
 	print(get_parent().name + " was hit")
 

@@ -46,12 +46,18 @@ func _on_health_component_health_depleted():
 
 func _on_hitbox_area_entered(area):
 
-	print("mob hitbox collided with " + area.name + " of " + area.get_parent().name)
+	#print("mob hitbox collided with " + area.name + " of " + area.get_parent().name)
+	
+	var x_vel = 200
+	var y_vel = -300
+	
+	if area.global_position.x < global_position.x:
+		x_vel = x_vel * -1
 	
 	if(area.name == "Hurtbox"):
 		var parent = area.get_parent()
 		if parent.has_node("HealthComponent"):
-			parent.get_node("HealthComponent").change_health(-1)
+			parent.get_node("HealthComponent").change_health(-1, x_vel, y_vel)
 
 
 

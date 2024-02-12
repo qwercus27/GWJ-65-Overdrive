@@ -4,6 +4,8 @@ extends PlayerState
 func enter(_msg := {}) -> void:
 
 	player.velocity = Vector2.ZERO
+	#print("entered idle state")
+	
 	
 func update(delta: float) -> void:
 	
@@ -18,4 +20,6 @@ func update(delta: float) -> void:
 		
 	if player.goal == true:
 		state_machine.transition_to("Goal")
-	
+
+		
+

@@ -1,17 +1,16 @@
 extends PlayerState
 
-# Called when the node enters the scene tree for the first time.
+func enter(_msg := {}) -> void:
+	#print("entered run state")
+	pass
+
+
 func physics_update(delta: float) -> void:
 	
 	if not player.is_on_floor():
 		state_machine.transition_to("Air")
 		return
 	
-#	var input_direction_x: float = (
-#		Input.get_action_strength("move_right")
-#		- Input.get_action_strength("move_left")
-#	)
-#	player.velocity.x = player.speed * input_direction_x
 	var direction = Input.get_axis("left", "right")
 
 	if direction:
@@ -29,4 +28,6 @@ func physics_update(delta: float) -> void:
 		
 	if player.goal == true:
 		state_machine.transition_to("Goal")
+
+		
 
