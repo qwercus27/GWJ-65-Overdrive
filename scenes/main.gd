@@ -124,6 +124,9 @@ func _on_next_level_timer_timeout():
 	goal_cleared = false
 	$Player.goal = false
 	$HUD/ClearedLabel.visible = false
+	
+	# TODO: move this into state machine?
+	$Player/StateMachine.transition_to("Air")
 
 
 func _on_danger_timer_timeout():

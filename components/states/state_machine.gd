@@ -13,15 +13,17 @@ func _ready() -> void:
 	
 	for child in get_children():
 		child.state_machine = self
+
 	state.enter()
 
 func _unhandled_input(event: InputEvent) -> void:
 	state.handle_input(event)
 
 func _process(delta: float) -> void:
+	
 	state.update(delta)
 
-func _physicis_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 	
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:

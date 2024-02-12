@@ -12,7 +12,8 @@ func _ready():
 
 func _on_hitbox_area_entered(area):
 
-	print("spike hitbox collided with " + area.name + " of " + area.get_parent().name)
+	if area.owner is CharacterBody2D:
+		print("spike hitbox collided with " + area.name + " of " + area.get_parent().name)
 	
 	if(area.name == "Hurtbox"):
 		var parent = area.get_parent()
