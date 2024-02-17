@@ -8,7 +8,7 @@ func enter(msg := {}) -> void:
 	bump = false
 	direction = msg.get("dir")
 	player.velocity.x = player.speed * direction * 5
-	player.get_node("Sprite2D/SpriteAnimationPlayer").play("sliding")
+	player.set_animation("sliding")
 	print("entered slide state")
 
 func physics_update(delta: float) -> void:
@@ -47,4 +47,4 @@ func bump_player():
 	player.set_velocity(Vector2(300 * direction * -1, player.jump_v/1.5))
 
 func exit():
-	player.get_node("Sprite2D/SpriteAnimationPlayer").play("standing")
+	player.set_animation("standing")

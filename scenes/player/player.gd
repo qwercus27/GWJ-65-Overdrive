@@ -111,4 +111,5 @@ func set_animation(anim_name : String):
 	%SpriteAnimationPlayer.play(anim_name)
 
 func get_animation():
-	var anim_name = %SpriteAnimationPlayer.current_animation
+	return %SpriteAnimationPlayer.current_animation
+	
