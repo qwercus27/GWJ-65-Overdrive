@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal goal_cleared
 signal health_changed
 signal od_meter_changed
-signal damaged
+signal bounce_activated()
 
 var normal_jump_v = -400.0
 var overdrive_jump_v = -500.0
@@ -81,6 +81,7 @@ func _on_hitbox_area_entered(area):
 	if(area.name == "Hurtbox"):
 		if area.get_parent().has_node("HealthComponent"):
 			area.get_parent().get_node("HealthComponent").change_health(-1)
+		bounce_activated.emit()
 		velocity.y = jump_v
 
 # player is damaged
@@ -89,11 +90,8 @@ func _on_hitbox_area_entered(area):
 # sprite blinks until timer ends
 # player cannot be damaged until timer ends
 
+func _on_health_component_damaged():
 
-func _on_health_component_damaged(x_vel : int, y_vel : int):
-	velocity.y = y_vel
-	velocity.x = x_vel
-	damaged.emit()
 	$RecoveryTimer.start()
 	$BlinkTimer.start()
 	$HealthComponent.recovery = true

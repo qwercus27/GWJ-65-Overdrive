@@ -20,5 +20,8 @@ func _on_hitbox_area_entered(area):
 		if parent.has_node("HealthComponent"):
 			
 			if parent is CharacterBody2D:
-				var x_vel = parent.velocity.x * -1
-				parent.get_node("HealthComponent").change_health(-1, x_vel, -400)
+				var x_vel : float = parent.velocity.x * -1
+				var y_vel : float = -400
+				
+				parent.get_node("HealthComponent").change_health(-1)
+				parent.set_velocity(Vector2(x_vel, y_vel))

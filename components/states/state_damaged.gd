@@ -9,7 +9,7 @@ func enter(msg := {}) -> void:
 	timer.timeout.connect(on_timer_timeout)
 	timer.one_shot = true
 	timer.autostart = false
-	timer.start(0.5)
+	timer.start(1)
 	print("entered damaged state")
 	
 # Called when the node enters the scene tree for the first time.

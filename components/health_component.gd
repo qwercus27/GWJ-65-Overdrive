@@ -16,19 +16,13 @@ func _ready():
 	health = max_health
 
 
-func change_health(amount : int, x_vel := 0, y_vel := 0):
+func change_health(amount : int):
 	
 	if recovery:
 		print(get_parent().name + " was hit, but was in recovery.")
 		return
 	
 	health += amount
-	
-	if(x_vel == 0): 
-		x_vel = owner.velocity.x
-		
-	if(y_vel == 0):
-		y_vel = owner.velocity.y
 	
 	if health > max_health:
 		health = max_health
@@ -38,7 +32,7 @@ func change_health(amount : int, x_vel := 0, y_vel := 0):
 	if health <= 0:
 		health_depleted.emit()
 	elif amount < 0:
-		damaged.emit(x_vel, y_vel)
+		damaged.emit()
 		
 	print(get_parent().name + " was hit")
 
