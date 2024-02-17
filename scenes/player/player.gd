@@ -43,6 +43,7 @@ func _physics_process(delta):
 	else:
 		speed = normal_speed
 		jump_v = normal_jump_v
+		
 
 
 func change_overdrive(amount):
@@ -99,9 +100,15 @@ func _on_health_component_damaged():
 
 func _on_recovery_timer_timeout():
 	$HealthComponent.recovery = false
-	$AnimatedSprite2D.visible = true
+	$Sprite2D.visible = true
 	$BlinkTimer.stop()
 
 
 func _on_blink_timer_timeout():
-	$AnimatedSprite2D.visible = not $AnimatedSprite2D.visible
+	$Sprite2D.visible = not $Sprite2D.visible
+	
+func set_animation(anim_name : String):
+	%SpriteAnimationPlayer.play(anim_name)
+
+func get_animation():
+	var anim_name = %SpriteAnimationPlayer.current_animation

@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(_msg := {}) -> void:
-	#print("entered run state")
+	print("entered run state")
 	pass
 
 
@@ -23,6 +23,8 @@ func physics_update(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("space"):
 		state_machine.transition_to("Air", {do_jump = true})
+	elif Input.is_action_just_pressed("Down"):
+		state_machine.transition_to("Slide", {dir = direction})
 	elif is_equal_approx(direction, 0.0):
 		state_machine.transition_to("Idle")
 		
