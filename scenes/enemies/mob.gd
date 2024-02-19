@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = -1
 var seen = false
+var recovery = false
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -24,13 +25,14 @@ func _physics_process(delta):
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-
-		move_and_slide()
-		
+			
 		if direction == -1 and velocity.x == 0:
 			direction = 1
 		elif direction == 1 and velocity.x == 0:
 			direction = -1	
+		move_and_slide()
+		
+
 	
 	#$Wander.wander(delta, velocity, is_on_floor())
 	
@@ -57,7 +59,7 @@ func _on_hitbox_area_entered(area):
 	if(area.name == "Hurtbox"):
 		var parent = area.get_parent()
 		if parent.has_node("HealthComponent"):
-			parent.get_node("HealthComponent").change_health(-1)
+			parent.get_node("HealthComponent").change_health(-1, true)
 			parent.set_velocity(Vector2(x_vel, y_vel))
 
 func _on_visible_on_screen_notifier_2d_screen_entered():

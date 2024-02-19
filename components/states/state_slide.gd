@@ -2,22 +2,32 @@ extends PlayerState
 
 var direction
 var bump = false
+var under
 
 func enter(msg := {}) -> void:
-
+	under = false
 	bump = false
 	direction = msg.get("dir")
-	player.velocity.x = player.speed * direction * 5
+	player.velocity.x = player.speed * direction * 2.5
 	player.set_animation("sliding")
-	print("entered slide state")
+	#print("entered slide state")
 
 func physics_update(delta: float) -> void:
 	
-	if bump:
-		player.velocity.x = move_toward(player.velocity.x, 0, 20)
+	if not bump:
+		if player.check_slide_collision():
+			player.velocity.x = player.speed * direction * 2.5
+			under = true
+		else:
+			if under:
+				player.velocity.x = move_toward(player.velocity.x, player.speed * direction, 
+				player.speed/6)
+			else:
+				player.velocity.x = move_toward(player.velocity.x, player.speed * direction, 
+				player.speed/10)
 	else:
-		player.velocity.x = move_toward(player.velocity.x, player.speed * direction, 
-			player.speed/6)
+		player.velocity.x = move_toward(player.velocity.x, 0, 20)
+
 	
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()

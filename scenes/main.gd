@@ -130,7 +130,7 @@ func _on_next_level_timer_timeout():
 
 
 func _on_danger_timer_timeout():
-	$Player/HealthComponent.change_health(-1)
+	$Player/HealthComponent.change_health(-1, false)
 	$HUD.flash_red()
 
 

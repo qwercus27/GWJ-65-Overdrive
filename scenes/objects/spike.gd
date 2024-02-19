@@ -23,5 +23,8 @@ func _on_hitbox_area_entered(area):
 				var x_vel : float = parent.velocity.x * -1
 				var y_vel : float = -400
 				
-				parent.get_node("HealthComponent").change_health(-1)
-				parent.set_velocity(Vector2(x_vel, y_vel))
+				if not parent.recovery: 
+					parent.set_velocity(Vector2(x_vel, y_vel))
+					
+				parent.get_node("HealthComponent").change_health(-1, true)
+

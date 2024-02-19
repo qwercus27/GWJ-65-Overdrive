@@ -8,17 +8,15 @@ signal damaged(x_vel : int)
 @export var max_health : int
 
 var health
-var recovery = false
-
 
 func _ready():
 	
 	health = max_health
 
 
-func change_health(amount : int):
+func change_health(amount : int, damage_state : bool):
 	
-	if recovery:
+	if owner.recovery:
 		print(get_parent().name + " was hit, but was in recovery.")
 		return
 	
@@ -31,7 +29,7 @@ func change_health(amount : int):
 	
 	if health <= 0:
 		health_depleted.emit()
-	elif amount < 0:
+	elif amount < 0 and damage_state:
 		damaged.emit()
 		
 	print(get_parent().name + " was hit")

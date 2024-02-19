@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(_msg := {}) -> void:
-	print("entered run state")
+	#print("entered run state")
 	pass
 
 

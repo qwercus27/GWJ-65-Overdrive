@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://5wm3sfgy5bfg"]
+[gd_scene load_steps=11 format=3 uid="uid://5wm3sfgy5bfg"]
 
 [ext_resource type="Texture2D" uid="uid://doje5egvae03c" path="res://images/tile_plain_block.png" id="1_afybb"]
 [ext_resource type="Script" path="res://scenes/levels/Level.gd" id="1_t6oj5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cd581uajje6dl" path="res://scenes/items/item.tscn" id="5_csvkc"]
 [ext_resource type="PackedScene" uid="uid://cng78laauelnw" path="res://scenes/objects/spike.tscn" id="6_1gfkd"]
 [ext_resource type="PackedScene" uid="uid://ctrnajsia6kgq" path="res://scenes/enemies/mob.tscn" id="6_tiekg"]
+[ext_resource type="PackedScene" uid="uid://tbh02r6btv6u" path="res://scenes/objects/block_slide.tscn" id="7_fkhbu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5hxe"]
 resource_name = "Floor"
@@ -16,10 +17,12 @@ texture = ExtResource("1_afybb")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tkgac"]
+resource_name = "Slide Block"
 scenes/1/scene = ExtResource("4_gg2q2")
 scenes/2/scene = ExtResource("5_csvkc")
 scenes/3/scene = ExtResource("6_tiekg")
 scenes/4/scene = ExtResource("6_1gfkd")
+scenes/5/scene = ExtResource("7_fkhbu")
 
 [sub_resource type="TileSet" id="TileSet_w7gmp"]
 uv_clipping = true

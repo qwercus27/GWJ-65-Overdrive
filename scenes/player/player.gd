@@ -6,8 +6,8 @@ signal health_changed
 signal od_meter_changed
 signal bounce_activated()
 
-var normal_jump_v = -400.0
-var overdrive_jump_v = -500.0
+var normal_jump_v = -450
+var overdrive_jump_v = normal_jump_v * 1.25
 var jump_v = normal_jump_v
 
 var normal_speed = 300.0
@@ -20,14 +20,13 @@ var timer_max = 4
 
 var goal = false
 var overdrive = false
+var recovery = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 
-	#print("vel_x: " + str(velocity.x))
-	
 	if(overdrive_meter >= meter_max):
 		if Input.is_action_just_pressed("a"):
 			overdrive = true
@@ -49,7 +48,12 @@ func _physics_process(delta):
 func change_overdrive(amount):
 	overdrive_meter += amount
 
-
+func check_slide_collision():
+	if $SlideRays/SlideRay1.is_colliding() or $SlideRays/SlideRay2.is_colliding():
+		return true
+	else:
+		return false
+		
 func _on_area_2d_area_entered(area):
 	
 	if(area.is_in_group("Items")):
@@ -81,9 +85,9 @@ func _on_hitbox_area_entered(area):
 	print("player hitbox collided with " + area.name + " of " + area.get_parent().name)
 	if(area.name == "Hurtbox"):
 		if area.get_parent().has_node("HealthComponent"):
-			area.get_parent().get_node("HealthComponent").change_health(-1)
+			area.get_parent().get_node("HealthComponent").change_health(-1, true)
 		bounce_activated.emit()
-		velocity.y = jump_v
+		velocity.y = jump_v * .75
 
 # player is damaged
 # vel.x away from damage, vel.y up (usually?)
@@ -95,11 +99,11 @@ func _on_health_component_damaged():
 
 	$RecoveryTimer.start()
 	$BlinkTimer.start()
-	$HealthComponent.recovery = true
+	recovery = true
 
 
 func _on_recovery_timer_timeout():
-	$HealthComponent.recovery = false
+	recovery = false
 	$Sprite2D.visible = true
 	$BlinkTimer.stop()
 
