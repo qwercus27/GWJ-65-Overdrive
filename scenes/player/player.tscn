@@ -11,87 +11,75 @@
 [ext_resource type="Script" path="res://components/states/state_damaged.gd" id="9_5vn7e"]
 [ext_resource type="Script" path="res://components/states/state_slide.gd" id="10_oi5a8"]
 
-[sub_resource type="Animation" id="Animation_k0uu4"]
-resource_name = "standing"
+[sub_resource type="Animation" id="Animation_fd640"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("../CollisionShape2D:shape:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [Vector2(14, 16)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../CollisionShape2D:shape:size")
+tracks/1/path = NodePath("../CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(14, 15)]
+"values": [Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../CollisionShape2D:position")
+tracks/2/path = NodePath("../Area2D/Area2DShape:shape:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0.5)]
+"values": [Vector2(14, 16)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Area2D/Area2DShape:shape:size")
+tracks/3/path = NodePath("../Area2D/Area2DShape:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(14, 16)]
+"values": [Vector2(0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Area2D/Area2DShape:position")
+tracks/4/path = NodePath("../Hurtbox/HurtboxShape:shape:size")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(14, 15)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Hurtbox/HurtboxShape:shape:size")
+tracks/5/path = NodePath("../Hurtbox/HurtboxShape:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(14, 15)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../Hurtbox/HurtboxShape:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -185,75 +173,87 @@ tracks/6/keys = {
 "values": [Vector2(0, 1.7)]
 }
 
-[sub_resource type="Animation" id="Animation_fd640"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_k0uu4"]
+resource_name = "standing"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../CollisionShape2D:shape:size")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(14, 16)]
+"update": 1,
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../CollisionShape2D:position")
+tracks/1/path = NodePath("../CollisionShape2D:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(14, 15)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Area2D/Area2DShape:shape:size")
+tracks/2/path = NodePath("../CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(14, 16)]
+"values": [Vector2(0, 0.5)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Area2D/Area2DShape:position")
+tracks/3/path = NodePath("../Area2D/Area2DShape:shape:size")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(14, 16)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Hurtbox/HurtboxShape:shape:size")
+tracks/4/path = NodePath("../Area2D/Area2DShape:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(14, 15)]
+"values": [Vector2(0, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Hurtbox/HurtboxShape:position")
+tracks/5/path = NodePath("../Hurtbox/HurtboxShape:shape:size")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, 15)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Hurtbox/HurtboxShape:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -314,7 +314,7 @@ one_shot = true
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_7roys")
-max_health = 10
+max_health = 5
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 2
@@ -355,10 +355,11 @@ script = ExtResource("9_5vn7e")
 script = ExtResource("10_oi5a8")
 
 [node name="RecoveryTimer" type="Timer" parent="."]
+wait_time = 1.5
 one_shot = true
 
 [node name="BlinkTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.15
 
 [node name="SlideRays" type="Node2D" parent="."]
 position = Vector2(-0.666667, 0)
@@ -367,12 +368,12 @@ scale = Vector2(0.333333, 0.333333)
 [node name="SlideRay1" type="RayCast2D" parent="SlideRays"]
 position = Vector2(24, 1)
 scale = Vector2(3, 3)
-target_position = Vector2(0, -11.305)
+target_position = Vector2(9.05991e-06, -8.00001)
 
 [node name="SlideRay2" type="RayCast2D" parent="SlideRays"]
 position = Vector2(-20, 1)
 scale = Vector2(3, 3)
-target_position = Vector2(0, -11.305)
+target_position = Vector2(0, -8)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="OverdriveTimer" to="." method="_on_overdrive_timer_timeout"]
