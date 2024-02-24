@@ -17,6 +17,11 @@ func _ready():
 	$Player.z_index = 1
 	$DangerLine.z_index = 2
 	
+	$HUD.health_max = $Player/HealthComponent.max_health
+	$HUD.overdrive_max = $Player.overdrive_max
+	
+	$HUD.update_health_meter($Player/HealthComponent.health)
+	$HUD.update_od_meter($Player.overdrive_meter)
 #	if(get_level_id(level) == 1): 
 #		danger_camera = true
 #		$DangerCameraTimer.start()
@@ -26,8 +31,8 @@ func _ready():
 	var _h = $Player/HealthComponent.health
 	var _max_h = $Player/HealthComponent.max_health
 	
-	$HUD.update_health_meter(_h,_max_h)
-	$HUD.update_od_meter($Player.overdrive_meter, $Player.meter_max)
+#	$HUD.update_health_meter(_h,_max_h)
+#	$HUD.update_od_meter($Player.overdrive_meter, $Player.meter_max)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -138,12 +143,14 @@ func _on_danger_camera_timer_timeout():
 	danger_camera = false
 
 
-func _on_player_health_changed():
-	var _h = $Player/HealthComponent.health
-	var _max_h = $Player/HealthComponent.max_health
-	
-	$HUD.update_health_meter(_h,_max_h)
+func _on_player_health_changed(): 
+	$HUD.update_health_meter($Player/HealthComponent.health	)
 
 
 func _on_player_od_meter_changed():
-	$HUD.update_od_meter($Player.overdrive_meter, $Player.meter_max)
+	$HUD.update_od_meter($Player.overdrive_meter)
+	if $Player.overdrive_meter == $Player.overdrive_max:
+		$HUD.get_node("BoostReadyLabel").visible = true
+	else:
+		$HUD.get_node("BoostReadyLabel").visible = false
+	

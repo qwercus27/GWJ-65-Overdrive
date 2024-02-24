@@ -5,7 +5,9 @@ signal health_changed
 signal health_depleted
 signal damaged(x_vel : int)
 
-@export var max_health : int
+@export var max_health : int:
+	get:
+		return max_health
 
 var health
 

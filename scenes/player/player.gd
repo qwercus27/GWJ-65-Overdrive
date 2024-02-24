@@ -15,7 +15,7 @@ var overdrive_speed = 500.0
 var speed = normal_speed
 
 var overdrive_meter = 0
-var meter_max = 5
+var overdrive_max = 5
 var timer_max = 4
 
 var goal = false
@@ -27,16 +27,16 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 
-	if(overdrive_meter >= meter_max):
+	if(overdrive_meter >= overdrive_max):
 		if Input.is_action_just_pressed("a"):
 			overdrive = true
-			overdrive_meter = float(meter_max - 0.1)
+			overdrive_meter = float(overdrive_max - 0.1)
 			$OverdriveTimer.start(timer_max)
 
 	if overdrive:
 		speed = overdrive_speed
 		jump_v = overdrive_jump_v
-		overdrive_meter = meter_max * ($OverdriveTimer.time_left / 4) - 0.01
+		overdrive_meter = overdrive_max * ($OverdriveTimer.time_left / 4) - 0.01
 		od_meter_changed.emit()
 		
 	else:
@@ -47,6 +47,8 @@ func _physics_process(delta):
 
 func change_overdrive(amount):
 	overdrive_meter += amount
+	if overdrive_meter > overdrive_max:
+		overdrive_meter = overdrive_max
 
 func check_slide_collision():
 	if $SlideRays/SlideRay1.is_colliding() or $SlideRays/SlideRay2.is_colliding():

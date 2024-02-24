@@ -2,38 +2,78 @@ extends CanvasLayer
 
 var od_meter_width = 20
 var hp_meter_width = 20
-# Called when the node enters the scene tree for the first time.
+
+var meter_scene = load("res://scenes/hud/meter.tscn")
+
+var overdrive_max: int = 5
+var health_max : int = 5
+
+var hp_cells = []
+var od_cells = []
+
 func _ready():
 	
-	$Boost/BoostMeterFrame/Mid.position.x = $Boost/BoostMeterFrame/Left.position.x + 1
-	$Boost/BoostMeterFrame/Mid.scale.x = od_meter_width * 3
-	$Boost/BoostMeterFrame/Right.position.x = $Boost/BoostMeterFrame/Mid.position.x + (od_meter_width * 3)
-	
-	$HP/HPFrame/Mid.position.x = $HP/HPFrame/Left.position.x + 1
-	$HP/HPFrame/Mid.scale.x = hp_meter_width * 3
-	$HP/HPFrame/Right.position.x = $HP/HPFrame/Mid.position.x + (hp_meter_width * 3)
+	meter_setup(hp_cells)
+	meter_setup(od_cells)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if $Boost/BoostMeterLine.scale.x >= od_meter_width * 9:
-		$Boost/BoostReadyLabel.visible = true
-	else:
-		$Boost/BoostReadyLabel.visible = false
-	
 	$HitScreen.color.a8 = 100 * $FlashTimer.time_left
 
 func flash_red():
 	$FlashTimer.start(1)
 
 
-func update_health_meter(health : int, max_health : int):
+func update_health_meter(health : int):
 	
-	var _new_width = (float(health) / float(max_health)) * hp_meter_width * 9
-	$HP/HPLine.scale.x = _new_width
+	var difference = health_max - health
+	
+	for hp in health_max:
+		if((hp + 1) <= health):
+			hp_cells[hp].get_node("Sprite2D").set_modulate(Color(1,0,0))
+		else:
+			hp_cells[hp].get_node("Sprite2D").set_modulate(Color(0.5,0.5,0.5))
 
-func update_od_meter(od : float, max_od : float):
+func update_od_meter(overdrive_current : int):
+	
+	var difference = overdrive_max - overdrive_current
+	
+	for od in overdrive_max:
+		if((od + 1) <= overdrive_current):
+			od_cells[od].get_node("Sprite2D").set_modulate(Color(1,1,1))
+		else:
+			od_cells[od].get_node("Sprite2D").set_modulate(Color(0.5,0.5,0.5))
 
-	var _new_width = od / max_od * od_meter_width * 9
-	$Boost/BoostMeterLine.scale.x = _new_width
+func meter_setup(array : Array):
+	
+	var max : int
+	var mid : int
+	var pos : Vector2
+	var last_pos : Vector2
+	var first : Node2D
+	
+	if array == hp_cells:
+		max = health_max
+		first = $HP/HP_1
+		pos = first.global_position
+	else:
+		max = overdrive_max
+		first = $OD/OD_1
+		pos = first.global_position
+	
+	mid = max - 2	
+	last_pos = pos + Vector2((max-1) * 48, 0)
+	
+	array.append(first)
+	
+	for i in mid:
+		array.append(meter_scene.instantiate())
+		array[i + 1] = meter_scene.instantiate()
+		array[i + 1].position = pos + Vector2(48*(i+1), 0)
+		array[i + 1].get_node("Sprite2D").set_region_rect(Rect2(23, 0, 22, 8))
+		add_child(array[i + 1])
 
+	array.append(meter_scene.instantiate())
+	array[max-1].position = last_pos
+	array[max-1].get_node("Sprite2D").set_region_rect(Rect2(46,0,22,8))
+	add_child(array[max-1])

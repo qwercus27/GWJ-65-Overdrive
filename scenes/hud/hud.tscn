@@ -1,105 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi0o07j0g42lx"]
+[gd_scene load_steps=6 format=3 uid="uid://bi0o07j0g42lx"]
 
-[ext_resource type="Texture2D" uid="uid://bnrx0hmchlagv" path="res://scenes/hud/overdrive_meter_line.png" id="1_1s7p6"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_liasb"]
-[ext_resource type="Texture2D" uid="uid://c5ymdhc3wia44" path="res://scenes/hud/overdrive_meter_frame_mid.png" id="3_uthqm"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_rrjq8"]
+[ext_resource type="PackedScene" uid="uid://b2wp1pekvvfr7" path="res://scenes/hud/meter.tscn" id="2_b2lt3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dsuot"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p83le"]
 font_size = 126
 
+[sub_resource type="LabelSettings" id="LabelSettings_rrjq8"]
+
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_liasb")
 
-[node name="Boost" type="Node2D" parent="."]
-position = Vector2(-22, 0)
-
-[node name="BoostMeterLine" type="Sprite2D" parent="Boost"]
-texture_filter = 1
-position = Vector2(133, 67)
-scale = Vector2(3, 3)
-texture = ExtResource("1_1s7p6")
-centered = false
-
-[node name="BoostMeterFrame" type="Node2D" parent="Boost"]
-position = Vector2(42, 49)
-scale = Vector2(3, 3)
-
-[node name="Left" type="Sprite2D" parent="Boost/BoostMeterFrame"]
-modulate = Color(0, 0, 0, 1)
-texture_filter = 1
-position = Vector2(29.3333, 6)
-texture = ExtResource("1_1s7p6")
-centered = false
-
-[node name="Mid" type="Sprite2D" parent="Boost/BoostMeterFrame"]
-texture_filter = 1
-position = Vector2(30.3333, 5)
-scale = Vector2(0.999996, 1)
-texture = ExtResource("3_uthqm")
-centered = false
-
-[node name="Right" type="Sprite2D" parent="Boost/BoostMeterFrame"]
-modulate = Color(0, 0, 0, 1)
-texture_filter = 1
-position = Vector2(31.3333, 6)
-texture = ExtResource("1_1s7p6")
-centered = false
-
-[node name="BoostLabel" type="Label" parent="Boost"]
-offset_left = 38.0
-offset_top = 66.0
-offset_right = 127.0
-offset_bottom = 92.0
-text = "Overdrive:"
-label_settings = SubResource("LabelSettings_rrjq8")
-metadata/_edit_use_anchors_ = true
-
-[node name="BoostReadyLabel" type="Label" parent="Boost"]
-offset_left = 131.0
-offset_top = 102.0
-offset_right = 244.0
-offset_bottom = 128.0
-text = "Ready! (A)"
-
-[node name="HP" type="Node2D" parent="."]
-position = Vector2(-22, 0)
-
-[node name="HPFrame" type="Node2D" parent="HP"]
-position = Vector2(42, 4)
-scale = Vector2(3, 3)
-
-[node name="Left" type="Sprite2D" parent="HP/HPFrame"]
-modulate = Color(0, 0, 0, 1)
-texture_filter = 1
-position = Vector2(29.3333, 6)
-texture = ExtResource("1_1s7p6")
-centered = false
-
-[node name="Mid" type="Sprite2D" parent="HP/HPFrame"]
-texture_filter = 1
-position = Vector2(30.3333, 5)
-scale = Vector2(0.999996, 1)
-texture = ExtResource("3_uthqm")
-centered = false
-
-[node name="Right" type="Sprite2D" parent="HP/HPFrame"]
-modulate = Color(0, 0, 0, 1)
-texture_filter = 1
-position = Vector2(31.3333, 6)
-texture = ExtResource("1_1s7p6")
-centered = false
-
-[node name="HPLine" type="Sprite2D" parent="HP"]
-modulate = Color(0.662745, 0, 0.0470588, 1)
-texture_filter = 1
-position = Vector2(133, 22)
-scale = Vector2(3, 3)
-texture = ExtResource("1_1s7p6")
-centered = false
+[node name="BoostReadyLabel" type="Label" parent="."]
+visible = false
+offset_left = 335.0
+offset_top = 57.0
+offset_right = 448.0
+offset_bottom = 83.0
+text = "[A] !"
 
 [node name="DangerDistance" type="Label" parent="."]
 offset_left = 11.0
@@ -136,3 +56,32 @@ color = Color(0.894118, 0, 0.137255, 0)
 
 [node name="FlashTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HP" type="Node2D" parent="."]
+position = Vector2(67, 22)
+
+[node name="HPLabel" type="Label" parent="HP"]
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 20.0
+offset_bottom = 24.0
+text = "HP"
+label_settings = SubResource("LabelSettings_rrjq8")
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_1" parent="HP" instance=ExtResource("2_b2lt3")]
+position = Vector2(57, 12)
+
+[node name="OD" type="Node2D" parent="."]
+position = Vector2(22, 58)
+
+[node name="OD_1" parent="OD" instance=ExtResource("2_b2lt3")]
+position = Vector2(70, 12)
+
+[node name="BoostLabel" type="Label" parent="OD"]
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 33.0
+offset_bottom = 24.0
+text = "OVD"
+label_settings = SubResource("LabelSettings_rrjq8")
