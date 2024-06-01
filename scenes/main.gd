@@ -75,6 +75,7 @@ func get_level_id(lvl):
 func _update_danger_distance():
 	
 	var _dist_label = $HUD.get_node("DangerDistance")
+	var _dist_label_big = $HUD.get_node("DangerDistanceBig")
 	var _dist_pos = $HUD.get_node("DistancePosition")
 	var _danger_pos = $DangerLine.position.x
 
@@ -83,9 +84,9 @@ func _update_danger_distance():
 	var _danger_dist = ($Player.position.x - _danger_pos) / (3*16)
 		
 	if(_danger_dist > 0): 
-		_dist_label.text = "< " + str(snapped(_danger_dist, 0.1))
+		_dist_label.text = "< " + str("%.1f" % snapped(_danger_dist, 0.1))
 	else:
-		_dist_label.text = str(snapped(_danger_dist * -1, 0.1)) + " >"
+		_dist_label.text = str("%.1f" % snapped(_danger_dist * -1, 0.1)) + " >"
 	
 	if _danger_dist < 10 and _danger_dist > 0:
 		_dist_label.position.x = _danger_pos - $Camera2D.position.x + _view_width/2 + 8*3
@@ -96,6 +97,8 @@ func _update_danger_distance():
 		_dist_label.position.x = _dist_pos.position.x + _view_width - 32*3
 	else:
 		_dist_label.position.x = _dist_pos.position.x 
+	
+	_dist_label_big.text = str("%.1f" % snapped(_danger_dist, 0.1))
 
 func _danger_preview():
 	

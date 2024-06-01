@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi0o07j0g42lx"]
+[gd_scene load_steps=7 format=3 uid="uid://bi0o07j0g42lx"]
 
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_liasb"]
 [ext_resource type="PackedScene" uid="uid://b2wp1pekvvfr7" path="res://scenes/hud/meter.tscn" id="2_b2lt3"]
@@ -9,6 +9,9 @@
 font_size = 126
 
 [sub_resource type="LabelSettings" id="LabelSettings_rrjq8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_avmgy"]
+font_size = 40
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_liasb")
@@ -85,3 +88,28 @@ offset_right = 33.0
 offset_bottom = 24.0
 text = "OVD"
 label_settings = SubResource("LabelSettings_rrjq8")
+
+[node name="DangerDistanceBig" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = 7.0
+offset_right = 40.0
+offset_bottom = 65.0
+size_flags_horizontal = 4
+text = "0.00"
+label_settings = SubResource("LabelSettings_avmgy")
+
+[node name="Meters" type="Label" parent="DangerDistanceBig"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -5.0
+offset_right = 44.0
+offset_bottom = 21.0
+text = "m"

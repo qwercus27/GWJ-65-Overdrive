@@ -26,7 +26,6 @@ layer_1/tile_data = PackedInt32Array(524355, 4, 131072, 524358, 4, 131072, 52436
 position = Vector2(-1728, 0)
 
 [node name="Run" type="Label" parent="." index="3"]
-visible = false
 offset_left = 222.0
 offset_top = 318.0
 offset_right = 309.0
@@ -35,7 +34,6 @@ text = "Run! →"
 label_settings = SubResource("LabelSettings_ddgm0")
 
 [node name="Label" type="Label" parent="Run" index="0"]
-visible = false
 layout_mode = 0
 offset_left = 1.0
 offset_top = 59.0
